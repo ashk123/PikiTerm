@@ -65,12 +65,12 @@ def GetArticleValue(NameAR) :
     for i in bodytext :
         BodySave += i.get_text()
     #print(BodySave)
-    sel = input("Do You Want to Save Article ? [y,n] ")
-    if sel == "y" :
-        SaveArticle(query, BodySave)
-        print("Your Article is Save .")
-    elif sel == "n" :
-        print("your article Was not Save .")
+    #sel = input("Do You Want to Save Article ? [y,n] ")
+    #if sel == "y" :
+    SaveArticle(query, BodySave)
+     #   print("Your Article is Save .")
+    #elif sel == "n" :
+     #   print("your article Was not Save .")
     # its a glitch def :)
     # ShellArticle(NameAR, BodySave)
     Read(NameAR)
