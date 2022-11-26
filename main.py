@@ -74,4 +74,5 @@ def GetArticleValue(NameAR) :
     # its a glitch def :)
     # ShellArticle(NameAR, BodySave)
     Read(NameAR)
+    
 GetArticleValue(Datas['SELECTION'])
