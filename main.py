@@ -64,15 +64,12 @@ def GetArticleValue(NameAR) :
     BodySave += f"Title : {Datas['TITLE']}\nBody :"
     for i in bodytext :
         BodySave += i.get_text()
-    #print(BodySave)
-    #sel = input("Do You Want to Save Article ? [y,n] ")
-    #if sel == "y" :
+    sel = True if input("Do You Want to Save Article ? [y,n] ") == "y" else False
     SaveArticle(query, BodySave)
-     #   print("Your Article is Save .")
-    #elif sel == "n" :
-     #   print("your article Was not Save .")
     # its a glitch def :)
     # ShellArticle(NameAR, BodySave)
     Read(NameAR)
+    if (sel == False) :
+        os.remove(f"Articles/Article {NameAR}.txt")
     
 GetArticleValue(Datas['SELECTION'])
