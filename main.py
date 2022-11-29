@@ -15,7 +15,14 @@ def SaveArticle(Name, Value) :
       #  return False
         
 Datas = {'SEARCH':'', 'TITLE':'', 'BODY':'', 'SELECTION':''}
-query = input("Enter the Content : ")
+if (len(sys.argv) > 1) :
+    argv_user = ""
+    for i in range(1, len(sys.argv)) :
+        argv_user += sys.argv[i] + " "
+
+    query = argv_user[:-1]
+else :
+    query = input("Enter the Content : ")
 url_search = f"https://en.wikipedia.org/w/index.php?search={query}&title=Special:Search&profile=advanced&fulltext=1&ns0=1&searchToken=7637hhwf6zvrreb4qxzqjusdb"
 
 res = requests.get(url_search)
@@ -32,7 +39,6 @@ for i3 in range(len(i2)) :
         num += 2
     except :
         pass
-
 sel = input("\nEnter Selection (default 1): ") or 1
 num = 0
 for i4 in Datas['SEARCH'] :
