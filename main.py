@@ -32,8 +32,7 @@ for i3 in range(len(i2)) :
     except :
         pass
 
-
-sel = input("\nEnter Selection : ")
+sel = input("\nEnter Selection (default 1): ") or 1
 num = 0
 for i4 in Datas['SEARCH'] :
     i4 = Datas['SEARCH'].split(":")
