@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import os
+import sys
 
 def SaveArticle(Name, Value) :
     #try
@@ -36,11 +37,16 @@ sel = input("\nEnter Selection (default 1): ") or 1
 num = 0
 for i4 in Datas['SEARCH'] :
     i4 = Datas['SEARCH'].split(":")
-    if str(int(sel) - 1) == i4[num] :
-        Datas['SELECTION'] = str(i4[num + 1])
+    try :
+        if str(int(sel) - 1) == i4[num] :
+            Datas['SELECTION'] = str(i4[num + 1])
+            break
+        else :
+            num += 2
+    except IndexError :
+        print("choos a correct one !")
+        sys.exit()
         break
-    else :
-        num += 2
 
 def Read(Name) :
     # id you have a linux or mac machine you can run this line ( or anything system that can run linux tools on windows machine )
