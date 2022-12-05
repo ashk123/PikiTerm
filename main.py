@@ -2,6 +2,16 @@ import requests
 from bs4 import BeautifulSoup
 import os
 import sys
+import urllib.parse
+
+more =  [
+    'en',
+    'jp',
+    'fa',
+    'eu'
+]
+
+cl = more[0]
 
 def SaveArticle(Name, Value) :
     #try
@@ -23,7 +33,7 @@ if (len(sys.argv) > 1) :
     query = argv_user[:-1]
 else :
     query = input("Enter the Content : ")
-url_search = f"https://en.wikipedia.org/w/index.php?search={query}&title=Special:Search&profile=advanced&fulltext=1&ns0=1&searchToken=7637hhwf6zvrreb4qxzqjusdb"
+url_search = f"https://{cl}.wikipedia.org/w/index.php?search={query}&title=Special:Search&profile=advanced&fulltext=1&ns0=1&searchToken=7637hhwf6zvrreb4qxzqjusdb"
 
 res = requests.get(url_search)
 soup = BeautifulSoup(res.text, "html.parser")
@@ -63,7 +73,10 @@ def GetArticleValue(NameAR) :
     BodyList = []
     query = NameAR
     text = ""
-    url = f"http://en.wikipedia.org/wiki/{query}"
+    Savename = query
+    # I added this line for encoding Japanese routes
+    query = urllib.parse.quote(query, encoding='utf-8')
+    url = f"http://{cl}.wikipedia.org/wiki/{query}"
     res = requests.get(url)
     soup = BeautifulSoup(res.text, "html.parser")
     tag_h1 = soup.find("h1", {'id':'firstHeading'})
@@ -76,11 +89,10 @@ def GetArticleValue(NameAR) :
     for i in bodytext :
         BodySave += i.get_text()
     sel = True if input("Do You Want to Save Article ? [y,n] ") == "y" else False
-    SaveArticle(query, BodySave)
+    SaveArticle(Savename, BodySave)
     # its a glitch def :)
     # ShellArticle(NameAR, BodySave)
     Read(NameAR)
     if (sel == False) :
         os.remove(f"Articles/Article {NameAR}.txt")
-    
 GetArticleValue(Datas['SELECTION'])
