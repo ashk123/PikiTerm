@@ -1,5 +1,26 @@
-Hello !
+### pikiTerm - Read WikiPeida on Terminal
 
-you can read wikipedia articles with this tool in your terminal
+## Use
+* pip3 install -r requirements.txt
+* python3 main.py Or python3 main.py <your_content>
+<br>
 
-**Notice**: its a very very beta version, if you saw a problem or bug, i'II be happy if you tell me :)
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+
+
+
+
+
+
+*2022 ashk123/Eiko*
