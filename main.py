@@ -4,6 +4,9 @@ import os
 import sys
 import urllib.parse
 
+# define section
+OS = 0 if (sys.platform == "linux") else 0 if (sys.platform == "darwin") else 1 if (sys.platform == "win32") else 0
+
 more =  [
     'en',
     'jp',
@@ -64,10 +67,13 @@ for i4 in Datas['SEARCH'] :
         sys.exit()
         break
 
-def Read(Name) :
-    # id you have a linux or mac machine you can run this line ( or anything system that can run linux tools on windows machine )
-    os.system(f'less Articles/"Article {Name}.txt"')
-
+def Read(Name, BodySave) :
+    if (OS == 0) :
+        os.system(f'less Articles/"Article {Name}.txt"')
+    elif (OS = 1) :
+        os.system("cls")
+        print(BodySave)
+    
 def GetArticleValue(NameAR) :
     BodySave = ""
     BodyList = []
@@ -92,7 +98,7 @@ def GetArticleValue(NameAR) :
     SaveArticle(Savename, BodySave)
     # its a glitch def :)
     # ShellArticle(NameAR, BodySave)
-    Read(NameAR)
+    Read(NameAR, BodySave)
     if (sel == False) :
         os.remove(f"Articles/Article {NameAR}.txt")
 GetArticleValue(Datas['SELECTION'])
