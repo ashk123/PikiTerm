@@ -70,7 +70,7 @@ for i4 in Datas['SEARCH'] :
 def Read(Name, BodySave) :
     if (OS == 0) :
         os.system(f'less Articles/"Article {Name}.txt"')
-    elif (OS = 1) :
+    elif (OS == 1) :
         os.system("cls")
         print(BodySave)
     
