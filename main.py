@@ -5,6 +5,7 @@ import sys
 import urllib.parse
 
 # define section
+VER = "1.9"
 OS = 0 if (sys.platform == "linux") else 0 if (sys.platform == "darwin") else 1 if (sys.platform == "win32") else 0
 
 more =  [
@@ -25,9 +26,15 @@ def SaveArticle(Name, Value, sa) :
         ar_file.write(Value)
         ar_file.close()
     return True
-        
+
+def CheckVersion(data) :
+    if (data == "-v" or data == "--version") :
+        print(f"pikiTerm 2022 V{VER}")
+        sys.exit()
+
 Datas = {'SEARCH':'', 'TITLE':'', 'BODY':'', 'SELECTION':''}
 if (len(sys.argv) > 1) :
+    CheckVersion(sys.argv[1])
     argv_user = ""
     for i in range(1, len(sys.argv)) :
         argv_user += sys.argv[i] + " "
