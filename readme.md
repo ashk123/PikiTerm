@@ -1,4 +1,4 @@
-### pikiTerm - Read WikiPeida on Terminal
+### <p align="center">pikiTerm - Read WikiPeida on Terminal</p>
 
 ## Use
 * pip3 install -r requirements.txt
