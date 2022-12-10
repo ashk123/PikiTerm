@@ -16,16 +16,15 @@ more =  [
 
 cl = more[0]
 
-def SaveArticle(Name, Value) :
-    #try
+def SaveArticle(Name, Value, sa) :
+    if (sa == False and OS == 1) :
+        return False
     if not os.path.exists("Articles") :
         os.mkdir("Articles")
     with open(f"Articles/Article {Name}.txt", "w", encoding="utf-8") as ar_file :
         ar_file.write(Value)
         ar_file.close()
     return True
-    # except :
-      #  return False
         
 Datas = {'SEARCH':'', 'TITLE':'', 'BODY':'', 'SELECTION':''}
 if (len(sys.argv) > 1) :
@@ -35,7 +34,14 @@ if (len(sys.argv) > 1) :
 
     query = argv_user[:-1]
 else :
-    query = input("Enter the Content : ")
+    try :
+        query = (input("Enter the Content : ") or False)
+    except KeyboardInterrupt :
+        print("\nyou cancel the proccess !")
+        sys.exit()
+if (query == False) :
+    print("Enter valid content !")
+    sys.exit()
 url_search = f"https://{cl}.wikipedia.org/w/index.php?search={query}&title=Special:Search&profile=advanced&fulltext=1&ns0=1&searchToken=7637hhwf6zvrreb4qxzqjusdb"
 
 res = requests.get(url_search)
@@ -52,7 +58,11 @@ for i3 in range(len(i2)) :
         num += 2
     except :
         pass
-sel = input("\nEnter Selection (default 1): ") or 1
+try :
+    sel = input("\nEnter Selection (default 1): ") or 1
+except KeyboardInterrupt :
+    print("\nyou cancel the proccess !")
+    sys.exit()
 num = 0
 for i4 in Datas['SEARCH'] :
     i4 = Datas['SEARCH'].split(":")
@@ -68,8 +78,10 @@ for i4 in Datas['SEARCH'] :
         break
 
 def Read(Name, BodySave) :
+    # Linux and MacOS
     if (OS == 0) :
         os.system(f'less Articles/"Article {Name}.txt"')
+    # Windows
     elif (OS == 1) :
         os.system("cls")
         print(BodySave)
@@ -80,7 +92,7 @@ def GetArticleValue(NameAR) :
     query = NameAR
     text = ""
     Savename = query
-    # I added this line for encoding Japanese routes
+    # I added this line for encoding Japanese or other routes
     query = urllib.parse.quote(query, encoding='utf-8')
     url = f"http://{cl}.wikipedia.org/wiki/{query}"
     res = requests.get(url)
@@ -95,10 +107,10 @@ def GetArticleValue(NameAR) :
     for i in bodytext :
         BodySave += i.get_text()
     sel = True if input("Do You Want to Save Article ? [y,n] ") == "y" else False
-    SaveArticle(Savename, BodySave)
+    SaveArticle(Savename, BodySave, sel)
     # its a glitch def :)
     # ShellArticle(NameAR, BodySave)
     Read(NameAR, BodySave)
-    if (sel == False) :
+    if (sel == False and OS == 0) :
         os.remove(f"Articles/Article {NameAR}.txt")
 GetArticleValue(Datas['SELECTION'])
