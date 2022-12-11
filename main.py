@@ -5,11 +5,16 @@ import sys
 import urllib.parse
 
 # Config (I make a config file soon)
-inform_conf = True
+inform_conf = False
 
 # define section
 VER = "1.9"
 OS = 0 if (sys.platform == "linux") else 0 if (sys.platform == "darwin") else 1 if (sys.platform == "win32") else 0
+Language = 1
+# 1 = EN
+# 2 = JP
+# 3 = FA
+# 4 = EU
 HELP = """pikiTerm Help --
 --------------------------------
 [!] What is pikiTerm ?
@@ -35,7 +40,7 @@ more =  [
     'eu'
 ]
 
-cl = more[0]
+cl = more[Language - 1]
 
 def SaveArticle(Name, Value, sa) :
     if (sa == False and OS == 1) :
@@ -87,6 +92,9 @@ res = requests.get(url_search)
 soup = BeautifulSoup(res.text, "html.parser")
 for i in range(5) :
     tag_span = soup.find("a", {'data-serp-pos':f'{str(i)}'})
+    if (tag_span == None) :
+        print("I finde anything !")
+        sys.exit()
     date_inform = soup.find("div", "mw-search-result-data").get_text().split(",")[1];
     date_form = " -" + date_inform
     Datas['SEARCH'] += str(i)+":"+tag_span.get_text() + (date_form if (inform_conf == True) else "") + ":"
