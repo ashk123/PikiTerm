@@ -10,6 +10,8 @@ inform_conf = False
 # define section
 VER = "1.9"
 INST_PATH = "/home/ashkan/code/python/wiki/V2/pikiTerm"
+SELECT_ART = 2
+SAVE = False
 OS = 0 if (sys.platform == "linux") else 0 if (sys.platform == "darwin") else 1 if (sys.platform == "win32") else 0
 Language = 1
 # 1 = EN
@@ -102,17 +104,20 @@ for i in range(5) :
 
 i2 = Datas['SEARCH'].split(":")
 num = 0
-for i3 in range(len(i2)) :
+if (SELECT_ART == None) :
+    for i3 in range(len(i2)) :
+        try :
+            print(str(int(i2[num]) + 1) + " -> " + i2[num + 1])
+            num += 2
+        except :
+            pass
     try :
-        print(str(int(i2[num]) + 1) + " -> " + i2[num + 1])
-        num += 2
-    except :
-        pass
-try :
-    sel = input("\nEnter Selection (default 1): ") or 1
-except KeyboardInterrupt :
-    print("\nyou cancel the proccess !")
-    sys.exit()
+        sel = input("\nEnter Selection (default 1): ") or 1
+    except KeyboardInterrupt :
+        print("\nyou cancel the proccess !")
+        sys.exit()
+else :
+    sel = SELECT_ART
 num = 0
 if (sel == "q") :
     sys.exit()
@@ -158,7 +163,10 @@ def GetArticleValue(NameAR) :
     BodySave += f"Title : {Datas['TITLE']}\nBody :"
     for i in bodytext :
         BodySave += i.get_text()
-    sel = True if (input("Do You Want to Save Article [y,N]: ") or "n") == "y" else False
+    if (SAVE == None) :
+        sel = True if (input("Do You Want to Save Article [y,N]: ") or "n") == "y" else False
+    else :
+        sel = SAVE
     SaveArticle(Savename, BodySave, sel)
     # its a glitch def :)
     # ShellArticle(NameAR, BodySave)
