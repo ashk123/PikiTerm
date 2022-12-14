@@ -9,6 +9,7 @@ inform_conf = False
 
 # define section
 VER = "1.9"
+INST_PATH = "/home/ashkan/code/python/wiki/V2/pikiTerm"
 OS = 0 if (sys.platform == "linux") else 0 if (sys.platform == "darwin") else 1 if (sys.platform == "win32") else 0
 Language = 1
 # 1 = EN
@@ -45,9 +46,9 @@ cl = more[Language - 1]
 def SaveArticle(Name, Value, sa) :
     if (sa == False and OS == 1) :
         return False
-    if not os.path.exists("Articles") :
-        os.mkdir("Articles")
-    with open(f"Articles/Article {Name}.txt", "w", encoding="utf-8") as ar_file :
+    if not os.path.exists(f"{INST_PATH}/Articles") :
+        os.mkdir(f"{INST_PATH}/Articles")
+    with open(f"{INST_PATH}/Articles/Article {Name}.txt", "w", encoding="utf-8") as ar_file :
         ar_file.write(Value)
         ar_file.close()
     return True
@@ -131,7 +132,7 @@ for i4 in Datas['SEARCH'] :
 def Read(Name, BodySave) :
     # Linux and MacOS
     if (OS == 0) :
-        os.system(f'less Articles/"Article {Name}.txt"')
+        os.system(f'less {INST_PATH}/Articles/"Article {Name}.txt"')
     # Windows
     elif (OS == 1) :
         os.system("cls")
@@ -157,11 +158,11 @@ def GetArticleValue(NameAR) :
     BodySave += f"Title : {Datas['TITLE']}\nBody :"
     for i in bodytext :
         BodySave += i.get_text()
-    sel = True if input("Do You Want to Save Article ? [y,n] ") == "y" else False
+    sel = True if (input("Do You Want to Save Article [y,N]: ") or "n") == "y" else False
     SaveArticle(Savename, BodySave, sel)
     # its a glitch def :)
     # ShellArticle(NameAR, BodySave)
     Read(NameAR, BodySave)
     if (sel == False and OS == 0) :
-        os.remove(f"Articles/Article {NameAR}.txt")
+        os.remove(f"{INST_PATH}/Articles/Article {NameAR}.txt")
 GetArticleValue(Datas['SELECTION'])
