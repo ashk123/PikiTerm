@@ -17,7 +17,8 @@
 
 <br>
 
-
+# Bugs
+- bug about information side
 
 
 
