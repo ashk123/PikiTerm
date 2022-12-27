@@ -19,7 +19,11 @@
 
 # Bugs
 - bug about information side
+<br>
 
+<br>
+
+<br>
 
 
 
