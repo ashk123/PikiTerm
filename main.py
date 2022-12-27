@@ -10,8 +10,8 @@ inform_conf = False
 # define section
 VER = "1.9"
 INST_PATH = "/home/ashkan/code/python/wiki/V2/pikiTerm"
-SELECT_ART = 2
-SAVE = False
+SELECT_ART = None
+SAVE = None
 OS = 0 if (sys.platform == "linux") else 0 if (sys.platform == "darwin") else 1 if (sys.platform == "win32") else 0
 Language = 1
 # 1 = EN
