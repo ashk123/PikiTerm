@@ -4,6 +4,7 @@ import os
 import sys
 import urllib.parse
 
+
 # Config (I make a config file soon)
 inform_conf = False
 
@@ -151,7 +152,7 @@ def GetArticleValue(NameAR) :
     Savename = query
     # I added this line for encoding Japanese or other routes
     query = urllib.parse.quote(query, encoding='utf-8')
-    url = f"http://{cl}.wikipedia.org/wiki/{query}"
+    url = f"https://{cl}.wikipedia.org/wiki/{query}"
     res = requests.get(url)
     soup = BeautifulSoup(res.text, "html.parser")
     tag_h1 = soup.find("h1", {'id':'firstHeading'})
